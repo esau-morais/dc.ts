@@ -71,9 +71,7 @@ _[See here](#how-to-setup-your-firebase-project) how to setup firebase project_
 
 6. Add a web app to the project and set a name
 
-![Add a web app](https://res.cloudinary.com/emmorais/image/upload/v1603312044/Firebase/Screenshot_2020-10-21_Discord_Clone_Configura%C3%A7%C3%B5es_Console_do_Firebase_qgnosu.png)
-
-7. After creating, copy the settings and set to the `.env` based on the `[.env_sample](./.env_sample)`
+7. After creating, copy the settings and set to the `.env` based on the [.env_sample](./.env_sample)
 
 8. Create google authentication
 
