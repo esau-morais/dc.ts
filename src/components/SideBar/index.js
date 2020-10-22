@@ -1,4 +1,6 @@
 import React from 'react';
+// Redux
+import { useSelector } from 'react-redux';
 // Styles
 import {
   SideBarContainer,
@@ -14,8 +16,14 @@ import { ReactComponent as DeafenIcon } from '../../assets/icons/headsetIcon.svg
 import { ReactComponent as UserSettingsIcon } from '../../assets/icons/settingsIcon.svg';
 // Components (child)
 import ChannelItem from './channel';
+// Redux → Dispatch/actions
+import { selectUser } from '../../redux/user';
+// Firebase → Logout authentication
+import { auth } from '../../config/firebase';
 
 export default function SideBar() {
+  const user = useSelector(selectUser);
+
   return (
     <SideBarContainer>
       {/* Channel header (title) */}
@@ -40,19 +48,23 @@ export default function SideBar() {
           {/* Left → User image */}
           <div className="avatar__wrapper">
             <div>
-              <MyAvatar />
+              <img
+                src={user.photo}
+                alt={user.displayName}
+                onClick={() => auth.signOut()}
+              />
             </div>
           </div>
           {/* Middle → Info */}
           <div className="name__tag">
             <div className="name__tag_nickname">
               <div>
-                emmorais
+                {user.displayName}
               </div>
             </div>
             <div>
               <div className="name__tag_hover_roll">
-                <div className="name__tag_code">#1321</div>
+                <div className="name__tag_code">#{user.uid.substring(0, 5)}</div>
                 <div className="name__tag_custom_status">
                   <div>
                     <img

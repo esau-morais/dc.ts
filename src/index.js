@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// Redux
+import { Provider } from 'react-redux';
+import store from './redux/store';
 // Styles
 import { ThemeProvider } from 'styled-components';
 // import { lightTheme } from './styles/themes/light';
@@ -12,7 +15,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={darkTheme}>
       <Global />
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

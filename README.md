@@ -4,11 +4,16 @@
 
 ## Goals
 
-
+- [ ] Add channel
+- [ ] Add chat
+- [X] Login authentication
 
 ## Buit with
 
-
+- [React.js](https://reactjs.org/) → Front-End
+  - Firebase
+  - styled-components
+  - Redux
 
 ## How do I start?
 
