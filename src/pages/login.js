@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 // Firebase
 import { auth, provider } from '../config/firebase';
 // Styles
-import { LoginContainer, InputBox } from '../components/login';
+import { LoginContainer } from '../components/login';
 
 export default function Login() {
   // Firebase job → Login using user google account

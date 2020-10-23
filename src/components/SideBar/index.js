@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // Redux
 import { useSelector } from 'react-redux';
 // Styles
@@ -10,7 +10,6 @@ import {
 } from './sidebar';
 // Components (icons/images)
 import { ReactComponent as ArrowDown } from '../../assets/icons/arrowDown.svg';
-import { ReactComponent as MyAvatar } from '../../assets/avatarMe.svg';
 import { ReactComponent as UnmuteIcon } from '../../assets/icons/mutedIcon.svg';
 import { ReactComponent as DeafenIcon } from '../../assets/icons/headsetIcon.svg';
 import { ReactComponent as UserSettingsIcon } from '../../assets/icons/settingsIcon.svg';
@@ -19,10 +18,35 @@ import ChannelItem from './channel';
 // Redux → Dispatch/actions
 import { selectUser } from '../../redux/user';
 // Firebase → Logout authentication
-import { auth } from '../../config/firebase';
+import db, { auth } from '../../config/firebase';
 
 export default function SideBar() {
+  // User information
   const user = useSelector(selectUser);
+  // Channel
+  const [channels, setChannels] = useState([]);
+
+  useEffect(() => {
+    // Create a collection to the channel information
+    db.collection('channels').onSnapshot(snapshot =>
+      setChannels(
+        snapshot.docs.map(doc => ({
+          id: doc.id,
+          channel: doc.data()
+        }))
+      )
+    );
+  }, []);
+
+  const handleAddChannel = () => {
+    const channelName = prompt("Channel name");
+    if (channelName) {
+      // Keep channel information in the collection
+      db.collection('channels').add({
+        channelName: channelName
+      })
+    }
+  }
 
   return (
     <SideBarContainer>
@@ -32,14 +56,20 @@ export default function SideBar() {
           <header>
             <h1>frombluetogreene</h1>
 
-            <ArrowDown />
+            <ArrowDown onClick={handleAddChannel} />
           </header>
         </ChannelTitleHeader>
       </nav>
       {/* Channels list */}
       <Channels>
         <div className="container">
-          <ChannelItem />
+          {channels.map(({ id, channel }) =>
+            <ChannelItem
+              key={id}
+              id={id}
+              channelName={channel.channelName}
+            />
+          )}
         </div>
       </Channels>
       {/* User section */}

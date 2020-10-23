@@ -4,8 +4,13 @@
 
 ## Goals
 
-- [ ] Add channel
-- [ ] Add chat
+- [X] Add channel
+  - [X] ID
+  - [X] Name
+- [X] Add chat
+  - [X] User picture
+  - [X] Timestamp
+  - [X] Username
 - [X] Login authentication
 
 ## Buit with

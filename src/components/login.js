@@ -42,8 +42,9 @@ export const LoginContainer = styled.div`
   }
 
   @media screen and (max-width: 880px) {
-    form {
-      width: 80%
+    div.form__container {
+      width: 80%;
+      text-align: center
     }
   }
 

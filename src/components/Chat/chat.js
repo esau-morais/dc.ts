@@ -232,6 +232,14 @@ export const ChatContainer = styled.div`
     &::placeholder {
       color: ${({ theme }) => theme.mutedText}
     }
+
+    /* If the user is not in a channel */
+    &:disabled {
+      cursor: not-allowed
+    }
+    &:disabled &::placeholder {
+      color: ${({ theme }) => theme.mutedText}
+    }
   }
   div.chat__text_area form > button {
     display: none

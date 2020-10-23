@@ -1,121 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+// Redux
+import { useDispatch } from 'react-redux';
 // Components (Images/Icons)
 import { ReactComponent as ChannelIcon } from '../../assets/icons/channelIcon.svg';
+// Reducer
+import { setChannelInfo } from '../../redux/channel';
 
-export default function ChannelItem({ id, channel }) {
-  const [selected, setSelected] = useState(true);
-
-  useEffect(() => {
-    if (selected) {
-      document.title = `#${channel}`
-    }
-  }, [])
+export default function ChannelItem({ id, channelName }) {
+  const dispatch = useDispatch();
 
   return (
     <div>
-      <div className={selected ? "content selectedChannel" : "content"}>
+      <div
+        className="content"
+        onClick={() => {
+            dispatch(setChannelInfo({
+              channelId: id,
+              channelName: channelName
+            }))
+            document.title = `${channelName}`
+          }
+        }
+      >
         <ChannelIcon />
 
         <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
-        </div>
-      </div>
-      <div className={!selected ? "content selectedChannel" : "content"}>
-        <ChannelIcon />
-
-        <div className="content__name">
-          ⭐-welcome-⭐
+          {channelName}
         </div>
       </div>
     </div>
