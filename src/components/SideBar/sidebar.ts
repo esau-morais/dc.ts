@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const SideBarContainer = styled.div`
   flex-direction: column;
@@ -59,7 +59,7 @@ export const SideBarContainer = styled.div`
   div.avatar__wrapper {
     margin-right: 0.5rem
   }
-  div.avatar__wrapper > div img {
+  div.avatar__wrapper > img {
     width: 2rem;
     height: 2rem;
 
@@ -144,7 +144,7 @@ export const SideBarContainer = styled.div`
   div.settings_wrapper button {
     cursor: pointer
   }
-`;
+`
 
 export const ChannelTitleHeader = styled.div`
   cursor: pointer;
@@ -191,10 +191,10 @@ export const ChannelTitleHeader = styled.div`
     font-weight: 500;
     color: white
   }
-`;
+`
 
 export const Channels = styled.div`
-  overflow: hidden scroll;
+  overflow: hidden auto;
   scrollbar-color: transparent transparent;
 
   padding-right: 2px;
@@ -247,7 +247,7 @@ export const Channels = styled.div`
 
     flex: 1 1 auto;
   }
-`;
+`
 
 export const UserButton = styled.div`
   line-height: 0;
@@ -263,4 +263,4 @@ export const UserButton = styled.div`
   position: relative;
 
   color: var(--interactive-normal);
-`;
+`

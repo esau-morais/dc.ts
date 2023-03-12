@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const LoadingContainer = styled.div`
   display: flex;
@@ -14,9 +14,10 @@ export const LoadingContainer = styled.div`
     text-align: center;
   }
 
-  div > video {
+  div > img {
     width: 12.5rem;
     height: 12.5rem;
+    object-fit: contain;
     visibility: visible
   }
 
@@ -44,4 +45,4 @@ export const LoadingContainer = styled.div`
     font-size: 1rem;
     line-height: 1.25rem;
   }
-`;
+`

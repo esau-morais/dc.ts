@@ -1,11 +1,9 @@
-import React from 'react';
-
-export default function Message({ user, timestamp, message }) {
+const Message = ({ user, timestamp, message }: any) => {
   return (
     <div className="message__content">
       <img
         src={user.photo}
-        alt="egonpax"
+        alt={user.displayName}
       />
       <h2>
         <span className="message__headerText">
@@ -23,3 +21,5 @@ export default function Message({ user, timestamp, message }) {
     </div>
   )
 }
+
+export default Message

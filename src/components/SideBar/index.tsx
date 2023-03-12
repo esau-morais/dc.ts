@@ -1,30 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
+
 // Styles
+// Components (icons/images)
+import { ReactComponent as ArrowDown } from '../../assets/icons/arrowDown.svg'
+import { ReactComponent as DeafenIcon } from '../../assets/icons/headsetIcon.svg'
+import { ReactComponent as UnmuteIcon } from '../../assets/icons/mutedIcon.svg'
+import { ReactComponent as UserSettingsIcon } from '../../assets/icons/settingsIcon.svg'
+// Components (child)
+import db, { auth } from '../../config/firebase'
+import { selectUser } from '../../redux/user'
+import ChannelItem from './channel'
+// Redux → Dispatch/actions
+// Firebase → Logout authentication
 import {
   SideBarContainer,
   ChannelTitleHeader,
   Channels,
   UserButton
-} from './sidebar';
-// Components (icons/images)
-import { ReactComponent as ArrowDown } from '../../assets/icons/arrowDown.svg';
-import { ReactComponent as UnmuteIcon } from '../../assets/icons/mutedIcon.svg';
-import { ReactComponent as DeafenIcon } from '../../assets/icons/headsetIcon.svg';
-import { ReactComponent as UserSettingsIcon } from '../../assets/icons/settingsIcon.svg';
-// Components (child)
-import ChannelItem from './channel';
-// Redux → Dispatch/actions
-import { selectUser } from '../../redux/user';
-// Firebase → Logout authentication
-import db, { auth } from '../../config/firebase';
+} from './sidebar'
 
-export default function SideBar() {
+const SideBar = () => {
   // User information
-  const user = useSelector(selectUser);
+  const user = useSelector(selectUser)
   // Channel
-  const [channels, setChannels] = useState([]);
+  const [channels, setChannels] = useState([])
 
   useEffect(() => {
     // Create a collection to the channel information
@@ -35,11 +36,11 @@ export default function SideBar() {
           channel: doc.data()
         }))
       )
-    );
-  }, []);
+    )
+  }, [])
 
   const handleAddChannel = () => {
-    const channelName = prompt("Channel name");
+    const channelName = prompt('Channel name')
     if (channelName) {
       // Keep channel information in the collection
       db.collection('channels').add({
@@ -54,7 +55,7 @@ export default function SideBar() {
       <nav>
         <ChannelTitleHeader>
           <header>
-            <h1>frombluetogreene</h1>
+            <h1>Discord</h1>
 
             <ArrowDown onClick={handleAddChannel} />
           </header>
@@ -77,13 +78,13 @@ export default function SideBar() {
         <div className="user__section_container">
           {/* Left → User image */}
           <div className="avatar__wrapper">
-            <div>
-              <img
-                src={user.photo}
-                alt={user.displayName}
-                onClick={() => auth.signOut()}
-              />
-            </div>
+            <img
+              role="presentation"
+              src={user.photo}
+              alt={user.displayName}
+              onClick={() => auth.signOut()}
+              title="Logout"
+            />
           </div>
           {/* Middle → Info */}
           <div className="name__tag">
@@ -96,27 +97,19 @@ export default function SideBar() {
               <div className="name__tag_hover_roll">
                 <div className="name__tag_code">#{user.uid.substring(0, 5)}</div>
                 <div className="name__tag_custom_status">
-                  <div>
-                    <img
-                      aria-label=":computer:"
-                      src="/assets/509dd485f6269e2521955120f3e8f0ef.svg"
-                      alt="💻"
-                      draggable="false"
-                    />
-                    <span>Learning and coding</span>
-                  </div>
+                  <span>Learning and coding</span>
                 </div>
               </div>
             </div>
           </div>
-        {/* Right → Settings */}
-        <div className="settings__wrapper">
-          {/* Unmute */}
-          <UserButton
-            aria-label="Mute"
-            role="switch"
-            aria-checked="true"
-              type="button">
+          {/* Right → Settings */}
+          <div className="settings__wrapper">
+            {/* Unmute */}
+            <UserButton
+              aria-label="Mute"
+              role="switch"
+              aria-checked="true"
+            >
               <div>
                 <UnmuteIcon />
               </div>
@@ -126,16 +119,13 @@ export default function SideBar() {
               aria-label=""
               role="switch"
               aria-checked="true"
-              type="button"
             >
               <DeafenIcon />
             </UserButton>
             {/* User settings */}
             <UserButton
               aria-label=""
-              role="open"
               aria-checked="false"
-              type="button"
             >
               <UserSettingsIcon />
             </UserButton>
@@ -145,3 +135,5 @@ export default function SideBar() {
     </SideBarContainer>
   )
 }
+
+export default SideBar

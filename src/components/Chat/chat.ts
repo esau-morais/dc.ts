@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const ChatContainer = styled.div`
   min-width: 0;
@@ -244,4 +244,4 @@ export const ChatContainer = styled.div`
   div.chat__text_area form > button {
     display: none
   }
-`;
+`

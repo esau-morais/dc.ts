@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, SyntheticEvent } from 'react'
 // Redux
-import { useSelector } from 'react-redux';
-// Components (icons/images)
-import { ReactComponent as ChannelIcon } from '../../assets/icons/channelIcon.svg';
-// Components (child)
-import Message from './message';
-// Styles
-import { ChatContainer } from './chat';
-// Dispatch
-import { selectUser } from '../../redux/user';
-import { selectChannelId, selectChannelName } from '../../redux/channel';
-// Firebase database
-import db from '../../config/firebase';
-import firebase from 'firebase';
+import { useSelector } from 'react-redux'
 
-export default function Chat() {
+import firebase from 'firebase'
+
+// Components (icons/images)
+import { ReactComponent as ChannelIcon } from '../../assets/icons/channelIcon.svg'
+// Components (child)
+import db from '../../config/firebase'
+import { selectChannelId, selectChannelName } from '../../redux/channel'
+import { selectUser } from '../../redux/user'
+import { ChatContainer } from './chat'
+import Message from './message'
+// Styles
+// Dispatch
+// Firebase database
+
+const Chat = () => {
   // User information
-  const user = useSelector(selectUser);
+  const user = useSelector(selectUser)
   // Channel information
-  const channelId = useSelector(selectChannelId);
-  const channelName = useSelector(selectChannelName);
+  const channelId = useSelector(selectChannelId)
+  const channelName = useSelector(selectChannelName)
   // Messages state
-  const [messages, setMessages] = useState([]);
-  const [messageInput, setMessageInput] = useState('');
+  const [messages, setMessages] = useState([])
+  const [messageInput, setMessageInput] = useState('')
   // Keep message on the collection and filter by timestamp
   useEffect(() => {
     if (channelId) {
@@ -31,14 +33,14 @@ export default function Chat() {
         .doc(channelId)
         .collection('messages')
         .orderBy('timestamp', 'desc')
-        .onSnapshot( snapshot =>
+        .onSnapshot(snapshot =>
           setMessages(snapshot.docs.map(doc => doc.data()))
         )
     }
   }, [channelId])
   // Handle messages sending
-  const handleMessagesSending = e => {
-    e.preventDefault();
+  const handleMessagesSending = (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault()
     // Add timestamp, message content and user
     db
       .collection('channels')
@@ -50,7 +52,7 @@ export default function Chat() {
         user: user
       })
     // Back to blank after submited
-    setMessageInput('');
+    setMessageInput('')
   }
 
   return (
@@ -75,6 +77,7 @@ export default function Chat() {
         {
           messages.map(message =>
             <Message
+              key={message.id}
               user={message.user}
               timestamp={message.timestamp}
               message={message.message}
@@ -91,7 +94,7 @@ export default function Chat() {
             disabled={!channelId}
             placeholder={channelName ?
               `Message ${channelName}`
-              : `Choose a channel to text a message`
+              : 'Choose a channel to text a message'
             }
             value={messageInput}
             onChange={e => setMessageInput(e.target.value)}
@@ -104,3 +107,5 @@ export default function Chat() {
     </ChatContainer>
   )
 }
+
+export default Chat

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
   width: 100vw;
@@ -9,7 +9,7 @@ export const LoginContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  background: url(https://discord.com/assets/fd91131ea693096d6be5e8aa99d18f9e.jpg) no-repeat center;
+  background: url(/bg.svg) no-repeat center;
   background-size: cover;
 
   img {
@@ -103,7 +103,7 @@ export const LoginContainer = styled.div`
       background-color: #677bc4
     }
   }
-`;
+`
 
 export const InputBox = styled.div`
   margin-bottom: 1.25rem;
@@ -149,4 +149,4 @@ export const InputBox = styled.div`
       border-color: #7289da
     }
   }
-`;
+`

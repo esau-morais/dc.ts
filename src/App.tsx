@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 // Routes
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-// Redux
-import { useSelector, useDispatch } from 'react-redux';
-// Components/Pages
-import Loading from './pages/loading';
-import Login from './pages/login';
-import Main from './pages/app';
-// Redux → User reducer/actions
-import { selectUser, setUser, unsetUser } from './redux/user';
-// Firebase authentication
-import { auth } from './config/firebase';
+import { useSelector, useDispatch } from 'react-redux'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
-function App() {
+// Redux
+// Components/Pages
+import { auth } from './config/firebase'
+import Main from './pages/app'
+import Loading from './pages/loading'
+import Login from './pages/login'
+// Redux → User reducer/actions
+import { selectUser, setUser, unsetUser } from './redux/user'
+// Firebase authentication
+
+const App = () => {
   // Loading state → If it's loading, show the page "isLoading"
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
   // User authentication
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
+  const user = useSelector(selectUser)
+  const dispatch = useDispatch()
 
   setTimeout(() => {
     setIsLoading(false)
@@ -56,7 +57,7 @@ function App() {
         )
       }
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
