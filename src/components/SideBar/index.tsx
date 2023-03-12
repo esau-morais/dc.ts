@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 // Redux
 import { useSelector } from 'react-redux'
 
+import { firestore } from 'firebase'
+
 // Styles
 // Components (icons/images)
 import { ReactComponent as ArrowDown } from '../../assets/icons/arrowDown.svg'
@@ -21,11 +23,14 @@ import {
   UserButton
 } from './sidebar'
 
+type Channels =
+  { id: string; channel: firestore.DocumentData; }[]
+
 const SideBar = () => {
   // User information
   const user = useSelector(selectUser)
   // Channel
-  const [channels, setChannels] = useState([])
+  const [channels, setChannels] = useState<Channels>([])
 
   useEffect(() => {
     // Create a collection to the channel information

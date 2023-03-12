@@ -2,7 +2,7 @@ import { useState, useEffect, SyntheticEvent } from 'react'
 // Redux
 import { useSelector } from 'react-redux'
 
-import firebase from 'firebase'
+import firebase, { firestore } from 'firebase'
 
 // Components (icons/images)
 import { ReactComponent as ChannelIcon } from '../../assets/icons/channelIcon.svg'
@@ -23,7 +23,7 @@ const Chat = () => {
   const channelId = useSelector(selectChannelId)
   const channelName = useSelector(selectChannelName)
   // Messages state
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState<firestore.DocumentData[]>([])
   const [messageInput, setMessageInput] = useState('')
   // Keep message on the collection and filter by timestamp
   useEffect(() => {

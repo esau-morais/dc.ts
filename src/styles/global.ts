@@ -24,8 +24,8 @@ const Global = createGlobalStyle`
     height: 100%;
 
     /* Theme switching */
-    background-color: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.normalText}
+    background-color: ${({ theme }: any) => theme.background};
+    color: ${({ theme }: any) => theme.normalText}
   }
 
   :root {

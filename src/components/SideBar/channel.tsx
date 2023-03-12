@@ -7,7 +7,7 @@ import { ReactComponent as ChannelIcon } from '../../assets/icons/channelIcon.sv
 import { setChannelInfo } from '../../redux/channel'
 
 type ChannelItemProps = {
-  id: number
+  id: string
   channelName: string
 }
 
