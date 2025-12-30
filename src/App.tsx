@@ -14,20 +14,14 @@ import { selectUser, setUser, unsetUser } from './redux/user'
 // Firebase authentication
 
 const App = () => {
-  // Loading state → If it's loading, show the page "isLoading"
-  const [isLoading, setIsLoading] = useState(true)
-  // User authentication
+  const [authLoading, setAuthLoading] = useState(true)
+  const [showLoading, setShowLoading] = useState(true)
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
 
-  setTimeout(() => {
-    setIsLoading(false)
-  }, 2500)
-
   useEffect(() => {
-    auth.onAuthStateChanged(authUser => {
+    const unsubscribe = auth.onAuthStateChanged(authUser => {
       if (authUser) {
-        // If the user is logged in
         dispatch(setUser({
           uid: authUser.uid,
           photo: authUser.photoURL,
@@ -35,27 +29,36 @@ const App = () => {
           displayName: authUser.displayName
         }))
       } else {
-        // If the user it NOT logged in
         dispatch(unsetUser())
       }
+      setAuthLoading(false)
     })
+
+    return () => unsubscribe()
   }, [dispatch])
+
+  useEffect(() => {
+    if (!authLoading) {
+      const timer = setTimeout(() => setShowLoading(false), 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [authLoading])
+
+  if (authLoading) {
+    return <Loading />
+  }
 
   return (
     <Router>
-      {
-        user ? (
-          <>
-            <Redirect to="/app" />
-            <Route exact path="/app" component={isLoading ? Loading : Main} />
-          </>
-        ) : (
-          <>
-            <Redirect to="/login" />
-            <Route path="/login" component={Login} />
-          </>
-        )
-      }
+      <Route exact path="/">
+        <Redirect to={user ? "/app" : "/login"} />
+      </Route>
+      <Route exact path="/app">
+        {user ? (showLoading ? <Loading /> : <Main />) : <Redirect to="/login" />}
+      </Route>
+      <Route path="/login">
+        {user ? <Redirect to="/app" /> : <Login />}
+      </Route>
     </Router>
   )
 }
